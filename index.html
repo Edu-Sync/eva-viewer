@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>EduSync Data Viewer</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <div id="top-nav"></div>
+    <nav>
+      <div id="left-nav">
+        <img src="assets/images/logo.png" alt="EduSync Logo" />
+        <span>EduSync Data Viewer</span>
+      </div>
+      <div id="right-nav">
+        <p>Versione 1.0.0</p>
+      </div>
+    </nav>
+    <div id="no-db">Nessun database selezionato</div>
+    <main id="viewer">
+      <div id="grid"></div>
+    </main>
+    <footer id="picker">
+      <span id="footer-left">
+        <div id="before-loading">
+          <button id="btnPick">Seleziona database</button>
+        </div>
+        <div id="after-loading">
+          <select id="tables"></select>
+          <button id="load">Carica</button>
+          <p id="pickStatus"></p>
+        </div>
+      </span>
+      <span id="footer-right">
+        <span id="status"></span>
+      </span>
+    </footer>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

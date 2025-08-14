@@ -1,0 +1,59 @@
+{
+  "name": "edusync-data-viewer",
+  "productName": "EduSync Data Viewer",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "author": {
+    "name": "Niccolo' Segato",
+    "email": "segato117@gmail.com"
+  },
+  "description": "A data viewer for SQLite databases",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && electron-builder",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.1",
+    "@types/better-sqlite3": "^7.6.13",
+    "electron": "^30.0.1",
+    "electron-builder": "^24.13.3",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.6",
+    "vite-plugin-electron": "^0.28.6",
+    "vite-plugin-electron-renderer": "^0.14.5"
+  },
+  "main": "dist-electron/main.js",
+  "dependencies": {
+    "better-sqlite3": "^12.2.0"
+  },
+  "build": {
+    "files": [
+      "dist/**",
+      "dist-electron/**",
+      "assets/**"
+    ],
+    "appId": "it.edusync.dataviewer",
+    "productName": "EduSync Data Viewer",
+    "asar": true,
+    "asarUnpack": ["**/*.node"],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "assets/icon.icns",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    }
+  }
+}
