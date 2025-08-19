@@ -76,6 +76,11 @@ function createMenu() {
           accelerator: 'CmdOrCtrl+E',
           click: () => BrowserWindow.getFocusedWindow()?.webContents.send('export-csv')
         },
+        {
+          label: 'Cerca',
+          accelerator: 'CmdOrCtrl+F',
+          click: () => BrowserWindow.getFocusedWindow()?.webContents.send('open-search')
+        },
         { type: 'separator' },
         isMac ? { role: 'close' } : { role: 'quit' }
       ]
@@ -156,6 +161,25 @@ app.whenReady().then(() => {
     if (!fs.existsSync(full)) return { ok: false, path: full, reason: 'not_found' };
     const res = await shell.openPath(full);
     return { ok: res === '', path: full };
+  });
+
+  ipcMain.handle('searchRows', (_e, table: string, query: string) => {
+    if (!db) throw new Error('DB non aperto');
+
+    // prendi colonne
+    const info = db.prepare(`PRAGMA table_info("${table}")`).all() as Array<{ name: string }>;
+    const cols = info.map(c => c.name);
+    if (cols.length === 0) return { columns: [], rows: [], foreignKeys: [] };
+
+    // WHERE: CAST(col AS TEXT) LIKE ? (COLLATE NOCASE) su tutte le colonne
+    const where = cols.map(n => `CAST("${n}" AS TEXT) LIKE ? COLLATE NOCASE`).join(' OR ');
+    const params = Array(cols.length).fill(`%${query}%`);
+
+    const rows = db.prepare(`SELECT * FROM "${table}" WHERE ${where}`).all(...params) as Array<Record<string, any>>;
+    const columns = rows.length ? Object.keys(rows[0] as object) : [];
+    const foreignKeys = db.prepare(`PRAGMA foreign_key_list("${table}")`).all() as Array<{ id:number; seq:number; table:string; from:string; to:string }>;
+
+    return { columns, rows, foreignKeys };
   });
 
   createWindow()

@@ -13,6 +13,11 @@ const beforeLoading = $('#before-loading') as HTMLDivElement
 const afterLoading = $('#after-loading') as HTMLDivElement
 const noDbLabel = $('#no-db') as HTMLDivElement
 
+const searchBar = $('#searchbar') as HTMLDivElement
+const searchInput = $('#searchInput') as HTMLInputElement
+const searchRun = $('#searchRun') as HTMLButtonElement
+const searchClear = $('#searchClear') as HTMLButtonElement
+
 let assetsDir: string | null = null;
 
 window.api.onAssetsDirChanged((dir: string) => {
@@ -52,6 +57,49 @@ btnLoad.addEventListener('click', async () => {
   statusEl.textContent = `Caricate ${rows.length} righe, colonne: ${columns.length}.`
 })
 
+// Apertura dalla voce di menu File → Cerca…
+window.api.onOpenSearch(() => openSearchBar(searchInput.value))
+
+// Pulsanti nella barra
+searchRun.addEventListener('click', runSearch)
+searchClear.addEventListener('click', () => { closeSearchBar(); statusEl.textContent = 'Ricerca chiusa.' })
+
+// Tasti: Enter per cercare, Esc per chiudere
+searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') runSearch()
+  else if (e.key === 'Escape') closeSearchBar()
+})
+
+// Fallback: intercetta Ctrl/⌘+F anche dal renderer (opzionale)
+window.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
+    e.preventDefault()
+    openSearchBar(searchInput.value)
+  }
+})
+
+function openSearchBar(initial = '') {
+  searchBar.style.display = 'flex'
+  searchInput.value = initial
+  searchInput.focus()
+  searchInput.select()
+}
+
+function closeSearchBar() {
+  searchBar.style.display = 'none'
+  searchInput.value = ''
+}
+
+async function runSearch() {
+  const table = tablesSel.value
+  const q = searchInput.value.trim()
+  if (!table) { statusEl.textContent = 'Seleziona una tabella prima di cercare.'; return }
+  if (!q) { statusEl.textContent = 'Inserisci un testo da cercare.'; return }
+  statusEl.textContent = `Cerco "${q}"...`
+  const { columns, rows, foreignKeys } = await window.api.searchRows(table, q, 1000)
+  renderTable(columns, rows, foreignKeys)
+  statusEl.textContent = `Trovate ${rows.length} righe per "${q}". Premi "Carica" per ripristinare l’intera tabella.`
+}
 
 window.api.onExportCsv(async () => {
   await exportCsv();

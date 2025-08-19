@@ -113,3 +113,19 @@ button {
 #pickStatus {
   display: none;
 }
+#searchbar {
+  display: none;
+  position: sticky;
+  top: 70px;
+  z-index: 5;
+  background: #fff;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+#searchInput {
+  flex: 1;
+  padding: 6px 8px;
+}

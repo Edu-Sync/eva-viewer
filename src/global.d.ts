@@ -19,6 +19,12 @@ declare global {
         rows: any[];
         foreignKeys: { table: string; from: string; to: string }[];
       }>;
+      searchRows: (t: string, q: string, limit?: number) => Promise<{
+        columns: string[]
+        rows: any[]
+        foreignKeys: { table: string; from: string; to: string }[]
+      }>
+      onOpenSearch: (cb: () => void) => void
     };
   }
 }

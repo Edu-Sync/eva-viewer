@@ -17,6 +17,12 @@ contextBridge.exposeInMainWorld('api', {
       rows: any[]
       foreignKeys: { table: string; from: string; to: string }[]
     }>,
+  onOpenSearch: (cb: () => void) => ipcRenderer.on('open-search', () => cb()),
+  searchRows: (t: string, q: string, limit?: number) =>
+    ipcRenderer.invoke('searchRows', t, q, limit) as Promise<{
+      columns: string[]; rows: any[];
+      foreignKeys: { table: string; from: string; to: string }[];
+    }>,
   onAssetsDirChanged: (cb: (dir: string) => void) => ipcRenderer.on('assets-dir-changed', (_e, d) => cb(d)),
   openAsset: (fileName: string) => ipcRenderer.invoke('openAsset', fileName) as Promise<{ ok: boolean; path: string; reason?: string }>
 })
