@@ -1,42 +1,42 @@
 # EduSync Data Viewer
 
-**EduSync Data Viewer** è un'applicazione **cross-platform** (macOS Apple Silicon e Windows x64) sviluppata con **Electron + Vite**.  
-Permette di **aprire database SQLite offline**, esplorarne le tabelle, navigare le relazioni tramite **foreign key**, cercare all’interno dei dati e **esportare in CSV**.
+**EduSync Data Viewer** is a **cross-platform** application (macOS Apple Silicon and Windows x64) developed with **Electron + Vite**.
+It allows you to **open SQLite databases offline**, explore their tables, navigate relationships via **foreign key**, search within the data, and **export to CSV**.
 
-> Pensato per offrire un accesso permanente ai dati anche dopo la fine di un abbonamento a servizi online.
-
----
-
-## ✨ Funzionalità
-
-- 🔌 **Apertura database SQLite** da file `.db`, `.sqlite`, `.sqlite3`  
-- 📑 **Elenco automatico delle tabelle** presenti nel DB  
-- 🔗 **Navigazione tra tabelle tramite foreign key**  
-- 🔍 **Ricerca full-text** (trova corrispondenze in qualsiasi colonna)  
-- 📤 **Export CSV** della tabella corrente  
-- 📁 **Supporto a risorse locali**: possibilità di associare una cartella contenente asset offline  
-- 🖥 **Interfaccia nativa**: menu integrato con macOS e Windows
+> Designed to offer permanent access to data even after an online service subscription ends.
 
 ---
 
-## 🚀 Installazione
+## ✨ Features
 
-Scarica l’ultima release per il tuo sistema operativo dalla sezione **[Releases](https://github.com/Edu-Sync/eva-viewer/releases)**.
+- 🔌 **Open SQLite databases** from `.db`, `.sqlite`, `.sqlite3` files
+- 📑 **Automatic table listing** present in the DB
+- 🔗 **Table navigation via foreign key**
+- 🔍 **Full-text search** (find matches in any column)
+- 📤 **Export CSV** of the current table
+- 📁 **Local resource support**: ability to associate a folder containing offline assets
+- 🖥 **Native interface**: integrated menu with macOS and Windows
+
+---
+
+## 🚀 Installation
+
+Download the latest release for your operating system from the **[Releases](https://github.com/Edu-Sync/eva-viewer/releases)** section.
 
 ### macOS (Apple Silicon)
-- Scarica il file `.dmg`
-- Apri e trascina l’applicazione in `Applicazioni`
-- Se compare il messaggio “sviluppatore non identificato”, apri con **clic destro → Apri** la prima volta
+- Download the `.dmg` file
+- Open and drag the application to `Applications`
+- If the message “unidentified developer” appears, open with **right click → Open** the first time
 
 ### Windows (x64)
-- Scarica l’installer `.exe`
-- Esegui e segui i passaggi guidati
+- Download the `.exe` installer
+- Run and follow the guided steps
 
 ---
 
-## 🛠 Per sviluppatori
+## 🛠 For Developers
 
-Clona la repo ed esegui in locale:
+Clone the repo and run locally:
 
 ```bash
 git clone https://github.com/Edu-Sync/eva-viewer.git
@@ -55,5 +55,5 @@ npm run build:win
 ## Screenshots
 ![Screenshot 1](https://github.com/Edu-Sync/eva-viewer/blob/main/assets/images/screenshot.png?raw=true)
 
-## Licenza
-Distribuito sotto la licenza MIT. Vedi `LICENSE` per ulteriori informazioni.
+## License
+Distributed under the MIT License. See `LICENSE` for more information.
