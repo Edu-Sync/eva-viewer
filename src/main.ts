@@ -18,6 +18,13 @@ let assetsDir: string | null = null;
 window.api.onAssetsDirChanged((dir: string) => {
   assetsDir = dir;
   statusEl.textContent = `Cartella assets: ${dir}`;
+  // Se la tabella è già visibile, aggiorna la tabella per abilitare i link "Apri"
+  const table = tablesSel.value;
+  if (table) {
+    window.api.loadRows(table).then(({ columns, rows, foreignKeys }) => {
+      renderTable(columns, rows, foreignKeys);
+    });
+  }
 });
 
 btnPick.addEventListener('click', async () => {
@@ -75,7 +82,7 @@ function getFileNameFromValue(v: any): string | null {
     return name || null
   } catch {
     // non è un URL: se sembra un nome file (ha un’estensione), usalo
-    if (/\.[a-z0-9]{2,8}$/i.test(s)) return s.split('/').pop() || s
+    //if (/\.[a-z0-9]{2,8}$/i.test(s)) return s.split('/').pop() || s
     return null
   }
 }
