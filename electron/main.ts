@@ -18,16 +18,18 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs')
     },
-    titleBarStyle: 'hidden',
-    titleBarOverlay: false,
-    // expose window controls in Windows/Linux
-    ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
+    // Su macOS usiamo titleBarStyle nascosto, su Windows/Linux lasciamo quello standard
+    ...(process.platform === 'darwin' ? { 
+      titleBarStyle: 'hidden',
+      titleBarOverlay: false
+    } : {
+      titleBarStyle: 'default'
+    }),
     autoHideMenuBar: false
     
   })
-  //if (process.platform === 'win32') {
-    win.setMenuBarVisibility(true)
-  //}
+  // Assicuriamoci che la barra dei menu sia sempre visibile
+  win.setMenuBarVisibility(true)
   if (import.meta.env.MODE === 'development') win.webContents.openDevTools()
   
   const isDev = !app.isPackaged;
