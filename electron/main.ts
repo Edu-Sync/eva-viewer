@@ -19,14 +19,15 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.mjs')
     },
     titleBarStyle: 'hidden',
+    titleBarOverlay: false,
     // expose window controls in Windows/Linux
     ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
     autoHideMenuBar: false
     
   })
-  if (process.platform === 'win32') {
+  //if (process.platform === 'win32') {
     win.setMenuBarVisibility(true)
-  }
+  //}
   if (import.meta.env.MODE === 'development') win.webContents.openDevTools()
   
   const isDev = !app.isPackaged;
