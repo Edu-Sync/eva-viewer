@@ -39,7 +39,7 @@ Scarica l’ultima release per il tuo sistema operativo dalla sezione **[Release
 Clona la repo ed esegui in locale:
 
 ```bash
-git clone https://github.com/<TUO-USERNAME>/eva-viewer.git
+git clone https://github.com/Edu-Sync/eva-viewer.git
 cd eva-viewer
 npm install
 npm run dev
@@ -53,7 +53,7 @@ npm run build:win
 ```
 
 ## Screenshots
-![Screenshot 1](./screenshots/screenshot1.png)
+![Screenshot 1](https://github.com/Edu-Sync/eva-viewer/blob/main/assets/images/screenshot.png?raw=true)
 
 ## Licenza
 Distribuito sotto la licenza MIT. Vedi `LICENSE` per ulteriori informazioni.
